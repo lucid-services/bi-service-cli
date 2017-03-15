@@ -1,6 +1,6 @@
 {
   "name": "bi-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CLI module for bi-service",
   "main": "./lib/index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "author": "Bohemia Interactive",
   "private": false,
   "peerDependencies": {
-      "bi-service": ">=0.8.4 <1"
+      "bi-service": ">=0.8.5 <1"
   },
   "dependencies": {
     "bi-vantage": "^1.7.1",
@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "bi-service": ">=0.8.4 <1",
+    "bi-service": ">=0.8.5 <1",
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
     "rewire": "^2.5.2",

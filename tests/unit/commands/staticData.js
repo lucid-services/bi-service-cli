@@ -7,7 +7,7 @@ var Promise        = require('bluebird');
 var service        = require('bi-service');
 
 var ConfigMock    = require('../mocks/config.js');
-var CLI           = require('../../../lib/index.js');
+var CLI           = require('../../../lib/index.js').CLI;
 var staticDataCmd = rewire('../../../lib/commands/staticData.js');
 
 //this makes sinon-as-promised available in sinon:

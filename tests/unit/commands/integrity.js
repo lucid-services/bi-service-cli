@@ -8,7 +8,7 @@ var service          = require('bi-service');
 var serviceIntegrity = require('bi-service/lib/serviceIntegrity');
 
 var ConfigMock       = require('../mocks/config.js');
-var CLI              = require('../../../lib/index.js');
+var CLI              = require('../../../lib/index.js').CLI;
 var integrityCmd     = rewire('../../../lib/commands/integrity.js');
 
 //this makes sinon-as-promised available in sinon:

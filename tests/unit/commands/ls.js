@@ -6,7 +6,7 @@ var service    = require('bi-service');
 
 var ConfigMock = require('../mocks/config.js');
 var ServerMock = require('../mocks/server.js');
-var CLI        = require('../../../lib/index.js');
+var CLI        = require('../../../lib/index.js').CLI;
 var lsCmd      = rewire('../../../lib/commands/ls.js');
 
 var AppManager = service.AppManager;

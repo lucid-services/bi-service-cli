@@ -7,7 +7,7 @@ var VorpalUI       = require('vorpal/dist/ui');
 var service        = require('bi-service');
 
 var Config     = require('./mocks/config.js');
-var CLI        = require('../../lib/index.js');
+var CLI        = require('../../lib/index.js').CLI;
 var commands   = require('../../lib/commands');
 var AppManager = service.AppManager;
 var App        = service.App;
@@ -39,7 +39,7 @@ describe('CLI', function() {
         it('should have Vantage server object', function() {
             var cli = new CLI(this.appManager, new Config(), {});
 
-            cli.should.have.property('server').that.is.an.instanceof(Vantage);
+            cli.should.have.property('vantage').that.is.an.instanceof(Vantage);
         });
 
         it('should register cli commands on server', function() {
@@ -76,7 +76,7 @@ describe('CLI', function() {
             //event though all tests pass
             this.cli.listen(3100);
 
-            this.cliServerCloseStub = sinon.stub(this.cli.server.server.server, 'close');
+            this.cliServerCloseStub = sinon.stub(this.cli.vantage.server.server, 'close');
         });
 
         beforeEach(function() {
@@ -105,7 +105,7 @@ describe('CLI', function() {
         before(function() {
             this.cli = new CLI(this.appManager, new Config(), {});
 
-            this.cliServerListenSpy = sinon.spy(this.cli.server, 'listen');
+            this.cliServerListenSpy = sinon.spy(this.cli.vantage, 'listen');
         });
 
         beforeEach(function() {
@@ -118,7 +118,7 @@ describe('CLI', function() {
             delete this.cli();
         });
 
-        it('should call cli.server.listen with provided options', function(done) {
+        it('should call cli.vantage.listen with provided options', function(done) {
             var self = this;
             var options = {
                 ssl: false
@@ -153,7 +153,7 @@ describe('CLI', function() {
         before(function() {
             this.cli = new CLI(this.appManager, new Config(), {});
 
-            this.cliServerShowStub = sinon.stub(this.cli.server, 'show');
+            this.cliServerShowStub = sinon.stub(this.cli.vantage, 'show');
         });
 
         after(function() {
@@ -161,7 +161,7 @@ describe('CLI', function() {
             delete this.cli;
         });
 
-        it('should call cli.server.show method', function() {
+        it('should call cli.vantage.show method', function() {
             this.cli.show();
             this.cliServerShowStub.should.have.been.calledOnce;
         });
@@ -178,7 +178,7 @@ describe('CLI', function() {
             //we can avoid "command registered more than once" warning by
             //explicitly unregistering cmd before it's registered again
             //in test cases
-            this.cli.server.commands.forEach(function(cmd) {
+            this.cli.vantage.commands.forEach(function(cmd) {
                 cmd.remove();
             });
         });
@@ -203,7 +203,7 @@ describe('CLI', function() {
         it('should assign `action` function to the Command object', function() {
             var self = this;
 
-            this.cli.server.on("command_registered", onCmd);
+            this.cli.vantage.on("command_registered", onCmd);
 
             Object.keys(commands).forEach(function(name, index) {
                 var cmdActionStub = sinon.stub(commands[name], 'action');
@@ -221,7 +221,7 @@ describe('CLI', function() {
                 cmdActionStub.restore();
             });
 
-            this.cli.server.removeListener("command_registered", onCmd);
+            this.cli.vantage.removeListener("command_registered", onCmd);
 
             function onCmd(opt) {
                 sinon.spy(opt.command, 'action');
