@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## v1.0.3
 
 * [FIXED] - make plugin from this module
+* [CHANGED] - renamed the module name from `bi-cli` to `bi-service-cli`
 
 ## v1.0.2
 
