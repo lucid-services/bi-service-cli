@@ -1,6 +1,6 @@
 {
   "name": "bi-service-cli",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "CLI module for bi-service",
   "main": "./lib/index.js",
   "scripts": {
@@ -18,6 +18,8 @@
       "bi-service": ">=0.9.0 <1"
   },
   "dependencies": {
+    "bi-json-inspector": "^1.0.0-rc.3b",
+    "bi-json-stringifier": "0.2.x",
     "bi-config": "^0.7.x",
     "bi-vantage": "^1.7.1",
     "chalk": "^1.1.3",
