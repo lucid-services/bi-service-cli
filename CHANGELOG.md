@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## FUTURE
+
+* [FIXED] - list missing dependencies (`bi-json-inspector` & `bi-json-stringifier`)
+
 ## v1.0.4
 
 * [FIXED] - invalid module require path
