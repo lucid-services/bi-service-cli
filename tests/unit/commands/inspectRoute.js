@@ -72,6 +72,7 @@ describe('`inspect route` command', function() {
             output.should.be.eql({
                 absolute: this.route.Router.App.config.get('baseUrl') + relativeUrl,
                 app: 'public',
+                summary: '',
                 // doesn't realy test much here regarding route's file definition location
                 //TODO fix this, incorrect file path is assigned, should be acual route definition file path instead of inspectRoute
                 fpath: require.resolve('./inspectRoute.js'),
