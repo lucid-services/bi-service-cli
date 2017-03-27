@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "bi-json-inspector": "^1.0.0-rc.3b",
-    "bi-json-stringifier": "0.2.x",
+    "bi-json-stringifier": "0.3.x",
     "bi-config": "^0.7.x",
     "bi-vantage": "^1.7.1",
     "easy-table": "^1.0.0",
