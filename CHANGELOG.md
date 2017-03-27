@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## FUTURE
+
+* [FIXED] - `ls` command - don't fail when a server is not running
+* [FIXED] - use `bi-json-inspector@0.3x`
+
 ## v1.0.6
 
 * [FIXED] - list missing `easy-table` dependency
