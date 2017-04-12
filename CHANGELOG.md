@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v1.0.9
+
+* [FIXED] - since `bi-service@0.10.x` the `AppManager` is responsible for registering a new App in its registry
+
 ## v1.0.8
 
 * [FIXED] - `inspect route` cmd json printing options
