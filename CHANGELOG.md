@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## FUTURE
+
+* [CHANGED] - use `bi-service@>0.13.x` API
+* [ADDED] - `sdkMethod` column to `ls -r` list of routes
+* [ADDED] - success response data schema to `inspect route <uid>` cmd output
+* [ADDED] - `ls -r <uid>` alias for `inspect route <uid>`
+
 ## v1.1.0
 
 * [ADDED] - http API

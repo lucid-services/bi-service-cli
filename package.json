@@ -15,7 +15,7 @@
   "author": "Bohemia Interactive",
   "private": false,
   "peerDependencies": {
-    "bi-service": ">=0.12.0 <1"
+    "bi-service": ">=0.13.0 <1"
   },
   "dependencies": {
     "bi-json-inspector": "^1.0.0-rc.3b",
@@ -28,7 +28,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "bi-service": ">=0.12.0 <1",
+    "bi-service": ">=0.13.0 <1",
     "bi-service-sdk": "^1.0.1",
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
