@@ -28,13 +28,13 @@ describe('`using` command', function() {
 
         this.appManager = new AppManager(this.models);
 
-        var app = this.app = this.appManager.buildApp(this.config);
-        var app2 = this.app2 = this.appManager.buildApp(this.config);
+        var app = this.app = this.appManager.buildApp(this.config, {name: 'app'});
+        var app2 = this.app2 = this.appManager.buildApp(this.config, {name: 'app2'});
 
         app.server = new ServerMock;
         app2.server = new ServerMock;
 
-        this.cli = new CLI(this.appManager, new ConfigMock(), {});
+        this.cli = new CLI(this.appManager, new ConfigMock(), {name: 'cli'});
 
         this.logStub = sinon.stub();
         this.printAppsSpy = sinon.spy(lsCmd, 'printApps');

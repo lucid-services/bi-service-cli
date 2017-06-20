@@ -40,7 +40,7 @@ describe('`staticData` command', function() {
         appManager.add(app);
         appManager.add(app2);
 
-        this.cli = new CLI(this.appManager, new ConfigMock(), {});
+        this.cli = new CLI(this.appManager, new ConfigMock(), {name: 'cli'});
     });
 
     describe('action', function() {

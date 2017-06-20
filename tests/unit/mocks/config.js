@@ -6,6 +6,11 @@ module.exports = Config;
  *
  */
 function Config() {
+    this.stores = {
+        literal: {
+            store: {}
+        }
+    };
 }
 
 
@@ -17,5 +22,6 @@ function Config() {
  * @return {undefined}
  */
 Config.prototype.get = function(key) {
+    return this.stores.literal.store[key];
 };
 

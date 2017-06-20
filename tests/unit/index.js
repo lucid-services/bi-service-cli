@@ -32,12 +32,12 @@ describe('CLI', function() {
         this.config = new Config();
 
         this.appManager = new AppManager(this.models);
-        var app = this.app = this.appManager.buildApp(this.config);
+        var app = this.app = this.appManager.buildApp(this.config, {name: 'app'});
     });
 
     describe('constructor', function() {
         it('should have Vantage server object', function() {
-            var cli = new CLI(this.appManager, new Config(), {});
+            var cli = new CLI(this.appManager, new Config(), {name: 'cli'});
 
             cli.should.have.property('vantage').that.is.an.instanceof(Vantage);
         });
@@ -48,7 +48,7 @@ describe('CLI', function() {
                 cmdSpies.push(sinon.spy(commands[name], 'build'));
             });
 
-            var cli = new CLI(this.appManager, new Config(), {});
+            var cli = new CLI(this.appManager, new Config(), {name: 'cli'});
 
             cmdSpies.forEach(function(spy) {
                 spy.should.have.been.calledOnce;
@@ -61,7 +61,7 @@ describe('CLI', function() {
 
         it('should throw an Error when we provide options.appManager that is not an instanceof AppManager', function() {
             function test() {
-                var cli = new CLI(this.appManager, new Config(), {});
+                var cli = new CLI(this.appManager, new Config(), {name: 'cli'});
             }
 
             expect(test).to.throw(Error);
@@ -70,7 +70,7 @@ describe('CLI', function() {
 
     describe('close', function() {
         before(function() {
-            this.cli = new CLI(this.appManager, new Config(), {});
+            this.cli = new CLI(this.appManager, new Config(), {name: 'cli'});
 
             //TODO causes the npm run coverage to print [ERROR]
             //event though all tests pass
@@ -103,7 +103,7 @@ describe('CLI', function() {
 
     describe('listen', function() {
         before(function() {
-            this.cli = new CLI(this.appManager, new Config(), {});
+            this.cli = new CLI(this.appManager, new Config(), {name: 'cli'});
 
             this.cliServerListenSpy = sinon.spy(this.cli.vantage, 'listen');
         });
@@ -151,7 +151,7 @@ describe('CLI', function() {
 
     describe('show', function() {
         before(function() {
-            this.cli = new CLI(this.appManager, new Config(), {});
+            this.cli = new CLI(this.appManager, new Config(), {name: 'cli'});
 
             this.cliServerShowStub = sinon.stub(this.cli.vantage, 'show');
         });
@@ -173,7 +173,7 @@ describe('CLI', function() {
 
     describe('Command definition interface every command should implement: ', function() {
         before(function() {
-            this.cli = new CLI(this.appManager, new Config(), {});
+            this.cli = new CLI(this.appManager, new Config(), {name: 'cli'});
 
             //we can avoid "command registered more than once" warning by
             //explicitly unregistering cmd before it's registered again

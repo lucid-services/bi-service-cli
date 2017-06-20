@@ -30,7 +30,7 @@ describe('`inspect route` command', function() {
 
         app.server = new ServerMock;
 
-        this.cli = new CLI(this.appManager, new ConfigMock(), {});
+        this.cli = new CLI(this.appManager, new ConfigMock(), {name: 'cli'});
 
         var router = app.buildRouter({
             version: '1.0',
