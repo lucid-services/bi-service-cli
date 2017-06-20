@@ -214,10 +214,10 @@ describe('`ls` command', function() {
                 this.app2,
             ]);
 
-            var expected = 'GET     /app   getApp_v1.0     main validator\n'+
-                           'GET     /app2  getApp2_v2.0    validator     \n'+
-                           'POST    /app2  postApp2_v2.0                 \n'+
-                           'DELETE  /del   deleteDel_v2.0                \n';
+            var expected = 'GET     /app   getApp_v1.0     getApp     main validator\n'+
+                           'GET     /app2  getApp2_v2.0    getApp2    validator     \n'+
+                           'POST    /app2  postApp2_v2.0   postApp2                 \n'+
+                           'DELETE  /del   deleteDel_v2.0  deleteDel                \n';
 
             output.should.be.equal(expected);
         });
@@ -233,8 +233,8 @@ describe('`ls` command', function() {
                     }
                 });
 
-                var expected = 'GET  /app   getApp_v1.0   main validator\n'+
-                               'GET  /app2  getApp2_v2.0  validator     \n';
+                var expected = 'GET  /app   getApp_v1.0   getApp   main validator\n'+
+                               'GET  /app2  getApp2_v2.0  getApp2  validator     \n';
 
                 output.should.be.equal(expected);
             });
@@ -249,8 +249,8 @@ describe('`ls` command', function() {
                     }
                 });
 
-                var expected = 'GET   /app2  getApp2_v2.0   validator\n'+
-                               'POST  /app2  postApp2_v2.0           \n';
+                var expected = 'GET   /app2  getApp2_v2.0   getApp2   validator\n'+
+                               'POST  /app2  postApp2_v2.0  postApp2           \n';
 
                 output.should.be.equal(expected);
             });
@@ -265,9 +265,9 @@ describe('`ls` command', function() {
                     }
                 });
 
-                var expected = 'GET     /app2  getApp2_v2.0    validator\n'+
-                               'POST    /app2  postApp2_v2.0            \n'+
-                               'DELETE  /del   deleteDel_v2.0           \n';
+                var expected = 'GET     /app2  getApp2_v2.0    getApp2    validator\n'+
+                               'POST    /app2  postApp2_v2.0   postApp2            \n'+
+                               'DELETE  /del   deleteDel_v2.0  deleteDel           \n';
 
                 output.should.be.equal(expected);
             });
@@ -284,7 +284,7 @@ describe('`ls` command', function() {
                     }
                 });
 
-                var expected = 'GET  /app2  getApp2_v2.0  validator\n';
+                var expected = 'GET  /app2  getApp2_v2.0  getApp2  validator\n';
 
                 output.should.be.equal(expected);
             });
@@ -300,10 +300,10 @@ describe('`ls` command', function() {
                     sort: 'm' //sort by route's (m)ethod
                 });
 
-                var expected = 'DELETE  /del   deleteDel_v2.0                \n'+
-                               'GET     /app   getApp_v1.0     main validator\n'+
-                               'GET     /app2  getApp2_v2.0    validator     \n'+
-                               'POST    /app2  postApp2_v2.0                 \n';
+                var expected = 'DELETE  /del   deleteDel_v2.0  deleteDel                \n'+
+                               'GET     /app   getApp_v1.0     getApp     main validator\n'+
+                               'GET     /app2  getApp2_v2.0    getApp2    validator     \n'+
+                               'POST    /app2  postApp2_v2.0   postApp2                 \n';
 
                 output.should.be.equal(expected);
             });
