@@ -33,7 +33,7 @@ describe('`use` command', function() {
         app.server = new ServerMock;
         app2.server = new ServerMock;
 
-        this.cli = new CLI(this.appManager, new ConfigMock(), {});
+        this.cli = this.appManager.buildCLI(new ConfigMock, {name: 'cli'});
 
         this.logStub = sinon.stub();
         this.action = useCmd.action(this.cli).bind({

@@ -24,13 +24,18 @@ describe('`inspect route` command', function() {
         };
         this.config = new ConfigMock();
 
+        this.configGetStub = sinon.stub(this.config, 'get');
+        this.configGetStub.withArgs('baseUrl').returns('http://127.0.0.1');
+        this.configGetStub.withArgs('protocol').returns('http:');
+        this.configGetStub.withArgs('host').returns('127.0.0.1');
+
         this.appManager = new AppManager(this.models);
 
         var app = this.app = this.appManager.buildApp(this.config, {name: 'public'});
 
         app.server = new ServerMock;
 
-        this.cli = new CLI(this.appManager, new ConfigMock(), {});
+        this.cli = new CLI(this.appManager, new ConfigMock(), {name: 'cli'});
 
         var router = app.buildRouter({
             version: '1.0',
@@ -53,9 +58,6 @@ describe('`inspect route` command', function() {
         this.action = inspectRouteCmd.action(this.cli).bind({
             log: this.logStub
         });
-
-        this.configGetStub = sinon.stub(this.config, 'get');
-        this.configGetStub.withArgs('baseUrl').returns('http://127.0.0.1');
     });
 
     beforeEach(function() {
@@ -67,18 +69,17 @@ describe('`inspect route` command', function() {
         it('should return an object describing inspected route', function() {
             var output = inspectRouteCmd.inspectRoute(this.route);
 
-            var relativeUrl = this.route.Router.options.url + this.route.options.url;
-
             output.should.be.eql({
-                absolute: this.route.Router.App.config.get('baseUrl') + relativeUrl,
+                absolute: this.route.getAbsoluteUrl(),
                 app: 'public',
                 summary: '',
                 // doesn't realy test much here regarding route's file definition location
                 //TODO fix this, incorrect file path is assigned, should be acual route definition file path instead of inspectRoute
                 fpath: require.resolve('./inspectRoute.js'),
                 method: this.route.options.type,
-                relative: relativeUrl,
+                relative: this.route.getUrl(),
                 uid: 'getApp_v1.0',
+                sdkMethod: 'getApp',
                 middlewares: {
                     validator: [{
                         target: 'query',
