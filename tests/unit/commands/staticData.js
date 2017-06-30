@@ -25,7 +25,9 @@ chai.should();
 describe('`staticData` command', function() {
     before(function() {
         //fake app
-        var appManager = this.appManager = new AppManager(/*no options needed for mocked apps*/);
+        this.service = new service.Service(new ConfigMock);
+
+        var appManager = this.appManager = this.service.appManager;
         var app = this.app = Object.create(App.prototype, {
             options: {
                 value: {name: 'public'}
