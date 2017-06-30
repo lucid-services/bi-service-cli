@@ -18,10 +18,6 @@ chai.should();
 
 describe('`inspect route` command', function() {
     before(function() {
-        this.models = {
-            odm: {},
-            orm: {}
-        };
         this.config = new ConfigMock();
 
         this.configGetStub = sinon.stub(this.config, 'get');
@@ -29,7 +25,8 @@ describe('`inspect route` command', function() {
         this.configGetStub.withArgs('protocol').returns('http:');
         this.configGetStub.withArgs('host').returns('127.0.0.1');
 
-        this.appManager = new AppManager(this.models);
+        this.service = new service.Service(this.config);
+        this.appManager = this.service.appManager;
 
         var app = this.app = this.appManager.buildApp(this.config, {name: 'public'});
 

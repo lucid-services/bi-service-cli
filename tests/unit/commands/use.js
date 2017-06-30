@@ -25,7 +25,8 @@ describe('`use` command', function() {
         };
         this.config = new ConfigMock();
 
-        this.appManager = new AppManager(this.models);
+        this.service = new service.Service(this.config);
+        this.appManager = this.service.appManager;
 
         var app = this.app = this.appManager.buildApp(this.config, {name: 'public'});
         var app2 = this.app2 = this.appManager.buildApp(this.config, {name: 'private'});
