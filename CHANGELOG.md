@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## FUTURE
+
+* [FIXED] - default `cli` config location should be `apps:cli` instead of `cli`
+
 ## v1.3.0
 
 * [REMOVED] - `bi-config` dependecy
