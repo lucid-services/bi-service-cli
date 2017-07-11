@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## FUTURE
+## v1.3.2
 
 * [FIXED] - `integrity` cli cmd and `/api/v1.0/integrity` http endpoint (were using stale interface of bi-service@<0.15.x)
 
