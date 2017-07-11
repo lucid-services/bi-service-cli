@@ -14,8 +14,6 @@ var integrityCmd     = rewire('../../../lib/commands/integrity.js');
 //this makes sinon-as-promised available in sinon:
 require('sinon-as-promised');
 
-var AppManager       = service.AppManager;
-var App              = service.App;
 var serviceIntegrity = service.serviceIntegrity;
 var ServiceError     = service.error.ServiceError;
 var expect           = chai.expect;
@@ -30,104 +28,87 @@ describe('`integrity` command', function() {
         var appManager = this.service.appManager;
         this.appManager = appManager;
 
-        //fake app
-        var app = this.app = Object.create(App.prototype, {
-            options: {
-                value: {name: 'public'}
-            }
-        });
-        var app2 = this.app2 = Object.create(App.prototype, {
-            options: {
-                value: {name: 'private'}
-            }
-        });
+        this.resourceInspectIntegrityStub = sinon.stub();
 
-        appManager.add(app);
-        appManager.add(app2);
+        //
+        this.service.resourceManager.add('res1', {
+            inspectIntegrity: this.resourceInspectIntegrityStub
+        });
+        //
+        this.service.resourceManager.add('res2', {
+            inspectIntegrity: this.resourceInspectIntegrityStub
+        });
 
         this.cli = new CLI(appManager, new ConfigMock(), {name: 'cli'});
+
+        this.logStub = sinon.stub();
+        this.action = integrityCmd.action(this.cli).bind({
+            log: this.logStub
+        });
+    });
+
+    beforeEach(function() {
+        this.logStub.reset();
     });
 
     describe('action', function() {
-        before(function() {
-            this.serviceIntegrityInspectStub = sinon.stub(serviceIntegrity, 'inspect');
-            this.logStub = sinon.stub();
-            this.action = integrityCmd.action(this.cli).bind({
-                log: this.logStub
+        describe('stub', function() {
+            before(function() {
+                this.resourceManagerInspectIntegrity = sinon.stub(this.service.resourceManager, 'inspectIntegrity');
             });
-        });
 
-        after(function() {
-            this.serviceIntegrityInspectStub.restore();
-        });
-
-        beforeEach(function() {
-            this.serviceIntegrityInspectStub.reset();
-            this.logStub.reset();
-            this.cli.apps = [];
-        });
-
-        it('should log an error when there is no app connected to the cli', function() {
-            var self = this;
-
-            function testCase() {
-                self.action({}, sinon.spy());
-            }
-
-            expect(testCase).to.throw(Error);
-            this.serviceIntegrityInspectStub.should.have.callCount(0);
-        });
-
-        it('should log an error when unexpected exception occurs', function(done) {
-            var self = this;
-            var err = new Error('test');
-
-            this.cli.apps.push(this.app);
-            this.serviceIntegrityInspectStub.returns(Promise.reject(err))
-
-            this.action({}, function() {
-                self.logStub.should.have.been.calledOnce;
-                self.logStub.should.have.been.calledWith(err.stack);
-                done();
+            after(function() {
+                this.resourceManagerInspectIntegrity.restore();
             });
-        });
 
-        it('should call serviceIntegrity.inspect for each connected app', function(done) {
-            var self = this;
-            this.serviceIntegrityInspectStub.returns(Promise.resolve({}));
-
-            this.cli.apps.push(this.app);
-            this.cli.apps.push(this.app2);
-
-            this.action({}, function() {
-                self.serviceIntegrityInspectStub.should.have.been.calledTwice;
-                self.serviceIntegrityInspectStub.should.have.been.calledWith(self.app);
-                self.serviceIntegrityInspectStub.should.have.been.calledWith(self.app2);
-                done();
+            beforeEach(function() {
+                this.resourceManagerInspectIntegrity.reset();
             });
-        });
 
-        it('should print the results of inspection', function(done) {
-            var self = this;
-            var outputData = [{
-                couchbase: 'couchbase',
-                postgres: 'postgres',
-                configuration: 'configuration',
-                node: 'node'
-            }];
+            it('should log an error when unexpected exception occurs', function(done) {
+                var self = this;
+                var err = new Error('test');
 
-            var printSpy = sinon.spy(integrityCmd, 'print');
+                this.resourceManagerInspectIntegrity.returns(Promise.reject(err))
 
-            this.serviceIntegrityInspectStub.returns(Promise.resolve(outputData));
-
-            this.cli.apps.push(this.app);
-
-            this.action({}, function() {
-                printSpy.should.have.been.calledOnce;
-                self.logStub.should.have.been.calledWith(printSpy.firstCall.returnValue);
-                printSpy.restore();
-                done();
+                this.action({}, function() {
+                    self.logStub.should.have.been.calledOnce;
+                    self.logStub.should.have.been.calledWith(err.stack);
+                    done();
+                });
             });
+
+            it('should call resourceManager.inspectIntegrity', function(done) {
+                var self = this;
+                this.resourceManagerInspectIntegrity.returns(Promise.resolve({}));
+
+                this.action({}, function() {
+                    self.resourceManagerInspectIntegrity.should.have.been.calledOnce;
+                    done();
+                });
+            });
+
+            it('should print the results of inspection', function(done) {
+                var self = this;
+                var outputData = [{
+                    couchbase: 'couchbase',
+                    postgres: 'postgres',
+                    configuration: 'configuration',
+                    node: 'node'
+                }];
+
+                var printSpy = sinon.spy(integrityCmd, 'print');
+
+                this.resourceManagerInspectIntegrity.returns(Promise.resolve(outputData));
+
+                this.action({}, function() {
+                    printSpy.should.have.been.calledOnce;
+                    self.logStub.should.have.been.calledWith(printSpy.firstCall.returnValue);
+                    printSpy.restore();
+                    done();
+                });
+            });
+
         });
 
         it('should convert serviceIntegrity error data object to an Array when inspection fails', function(done) {
@@ -137,46 +118,40 @@ describe('`integrity` command', function() {
 
             var printSpy = sinon.spy(integrityCmd, 'print');
 
-            this.serviceIntegrityInspectStub.onFirstCall().returns(Promise.resolve(outputData));
-            this.serviceIntegrityInspectStub.onSecondCall().returns(Promise.reject(error));
-
-            this.cli.apps.push(this.app);
-            this.cli.apps.push(this.app2);
+            this.resourceInspectIntegrityStub.onFirstCall().returns(Promise.resolve(outputData));
+            this.resourceInspectIntegrityStub.onSecondCall().returns(Promise.reject(error));
 
             this.action({}, function() {
-                printSpy.should.have.been.calledOnce;
-                self.logStub.should.have.been.calledWith(printSpy.firstCall.returnValue);
-                printSpy.restore();
-                done();
+                try {
+                    self.resourceInspectIntegrityStub.should.have.been.calledTwice;
+                    printSpy.should.have.been.calledOnce;
+                    self.logStub.should.have.been.calledWith(printSpy.firstCall.returnValue);
+                    printSpy.restore();
+                    done();
+                } catch (e) {
+                    done(e);
+                }
             });
         });
     });
 
     describe('print', function() {
         it('should return correctly formated string', function() {
-            var data = [
-                {
-                    node: 'node',
-                    couchbase: 'couchbase',
-                    postgres: 'postgres',
-                    configuration: 'configuration',
-                    session: 'session'
-                },
-                {
-                    node: 'node2',
-                    couchbase: 'couchbase2',
-                    postgres: 'postgres2',
-                    configuration: 'configuration',
-                    session: 'session'
-                }
-            ];
+            var data = {
+                node: true,
+                couchbase: true,
+                postgres: false,
+                configuration: {},
+                session: false
+            };
 
-            var output = integrityCmd.print(data, this.appManager.apps);
+            var output = integrityCmd.print(data);
 
-            var expected = 'ID  APP      NODE   COUCHBASE   POSTGRES   SESSION  CONFIGURATION\n' +
-                           '--  -------  -----  ----------  ---------  -------  -------------\n' +
-                           '0   public   node   couchbase   postgres   session  configuration\n' +
-                           '1   private  node2  couchbase2  postgres2  session  configuration\n';
+            var expected = 'node           true \n' +
+                           'couchbase      true \n' +
+                           'postgres       false\n' +
+                           'configuration  true \n' +
+                           'session        false\n';
             output.should.be.equal(expected);
         });
     });
