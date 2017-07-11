@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v1.3.3
+
+* [FIXED] - CLI app initialization should be postponed to the point where all apps are synchronously prepared for startup
+
 ## v1.3.2
 
 * [FIXED] - `integrity` cli cmd and `/api/v1.0/integrity` http endpoint (were using stale interface of bi-service@<0.15.x)
