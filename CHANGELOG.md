@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## FUTURE
+## v1.3.3
 
 * [FIXED] - CLI app initialization should be postponed to the point where all apps are synchronously prepared for startup
 
