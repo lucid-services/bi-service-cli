@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## FUTURE
+
+* [FIXED] - set default express body-parser options for http requests
+
 ## 1.3.4
 
 * [FIXED] - fixed incorrect serializing of Errors of integrity cmd & /api/v1.0/integrity route
