@@ -38,6 +38,9 @@ Add the cli app
 }
 ```
 
+**TIP:** When you want to quickly show the REPL console and do not want want to edit the config, you can override the config option inline like so:
+> node bin/www apps.cli.show 1  
+
 ### Using the console
 
 After you are connected to the console. The `help` command is your friend.  
