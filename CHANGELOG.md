@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## FUTURE
+## 1.3.7
 
 * [FIXED] - `CLI.prototype.close` should not fail when no server is running
 * [FIXED] - add `memory` writable store to cli config
