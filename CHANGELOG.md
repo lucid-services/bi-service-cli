@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.3.6
 
 * [FIXED] - `AppManager.prototype.buildCLI` should emit the `build-app` event
+* [FIXED] - `CLI.prototype.close` should not fail when no server is running
+* [FIXED] - add `memory` writable store to cli config
 
 ## 1.3.5
 
