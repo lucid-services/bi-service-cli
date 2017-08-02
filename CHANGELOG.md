@@ -4,11 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## FUTURE
+
+* [FIXED] - `CLI.prototype.close` should not fail when no server is running
+* [FIXED] - add `memory` writable store to cli config
+
 ## 1.3.6
 
 * [FIXED] - `AppManager.prototype.buildCLI` should emit the `build-app` event
-* [FIXED] - `CLI.prototype.close` should not fail when no server is running
-* [FIXED] - add `memory` writable store to cli config
 
 ## 1.3.5
 
