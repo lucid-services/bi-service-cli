@@ -3,10 +3,10 @@ var chai           = require('chai');
 var sinonChai      = require("sinon-chai");
 var chaiAsPromised = require('chai-as-promised');
 var Vantage        = require('bi-vantage');
-var VorpalUI       = require('vorpal/dist/ui');
+var VorpalUI       = require('vorpal/lib/ui');
 var service        = require('bi-service');
 
-var Config     = require('./mocks/config.js');
+var Config     = require('bi-config').Config;
 var CLI        = require('../../lib/index.js').CLI;
 var commands   = require('../../lib/commands');
 var AppManager = service.AppManager;

@@ -4,7 +4,7 @@ var chai       = require('chai');
 var sinonChai  = require("sinon-chai");
 var service    = require('bi-service');
 
-var ConfigMock      = require('../mocks/config.js');
+var Config          = require('bi-config').Config;
 var ServerMock      = require('../mocks/server.js');
 var CLI             = require('../../../lib/index.js').CLI;
 var inspectRouteCmd = rewire('../../../lib/commands/inspectRoute.js');
@@ -18,12 +18,11 @@ chai.should();
 
 describe('`inspect route` command', function() {
     before(function() {
-        this.config = new ConfigMock();
-
-        this.configGetStub = sinon.stub(this.config, 'get');
-        this.configGetStub.withArgs('baseUrl').returns('http://127.0.0.1');
-        this.configGetStub.withArgs('protocol').returns('http:');
-        this.configGetStub.withArgs('host').returns('127.0.0.1');
+        this.config = new Config({
+            baseUrl: 'http://127.0.0.1',
+            protocol: 'http:',
+            host: '127.0.0.1'
+        });
 
         this.service = new service.Service(this.config);
         this.appManager = this.service.appManager;
@@ -32,7 +31,7 @@ describe('`inspect route` command', function() {
 
         app.server = new ServerMock;
 
-        this.cli = new CLI(this.appManager, new ConfigMock(), {name: 'cli'});
+        this.cli = new CLI(this.appManager, new Config(), {name: 'cli'});
 
         var router = app.buildRouter({
             version: '1.0',
@@ -44,9 +43,6 @@ describe('`inspect route` command', function() {
             type: 'get'
         });
 
-        route.validate({
-            $is: Object
-        }, 'query');
         route.main(sinon.spy());
 
         this.route = route;
@@ -59,7 +55,6 @@ describe('`inspect route` command', function() {
 
     beforeEach(function() {
         this.logStub.reset();
-        this.configGetStub.reset();
     });
 
     describe('inspectRoute', function() {
@@ -77,12 +72,6 @@ describe('`inspect route` command', function() {
                 relative: this.route.getUrl(),
                 uid: 'getApp_v1.0',
                 sdkMethod: 'getApp',
-                middlewares: {
-                    validator: [{
-                        target: 'query',
-                        schema: {$is: 'Object'}
-                    }]
-                }
             });
         });
     });
