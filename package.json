@@ -1,6 +1,6 @@
 {
   "name": "bi-service-cli",
-  "version": "1.3.8",
+  "version": "2.0.0-alpha",
   "description": "CLI module for bi-service",
   "main": "./lib/index.js",
   "scripts": {
