@@ -1,3 +1,5 @@
+Provides a `bi-service` based `App` which spies on `AppManager`'s apps to provide
+integrity status of the running service.
 
 ### Integration
 
@@ -26,6 +28,7 @@ Add the cli app
         }
     },
     apps: {
+        //It expects the app to be under "apps.cli" name
         cli: {
             baseUrl: {$join: [
                 'http://127.0.0.1:',
@@ -45,3 +48,7 @@ Add the cli app
 
 After you are connected to the console. The `help` command is your friend.  
 Use it to get an overview of available commands and their usage 
+
+### REST API
+
+GET `/api/v1.0/integrity` - responds with `409` status in case of integrity error or `200` signalizing all OK.

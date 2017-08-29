@@ -5,16 +5,14 @@ var sinonChai        = require("sinon-chai");
 var chaiAsPromised   = require('chai-as-promised');
 var Promise          = require('bluebird');
 var service          = require('bi-service');
-var serviceIntegrity = require('bi-service/lib/serviceIntegrity');
 
-var ConfigMock       = require('../mocks/config.js');
+var Config           = require('bi-config').Config;
 var CLI              = require('../../../lib/index.js').CLI;
 var integrityCmd     = rewire('../../../lib/commands/integrity.js');
 
 //this makes sinon-as-promised available in sinon:
 require('sinon-as-promised');
 
-var serviceIntegrity = service.serviceIntegrity;
 var ServiceError     = service.error.ServiceError;
 var expect           = chai.expect;
 
@@ -24,7 +22,7 @@ chai.should();
 
 describe('`integrity` command', function() {
     before(function() {
-        this.service = new service.Service(new ConfigMock);
+        this.service = new service.Service(new Config);
         var appManager = this.service.appManager;
         this.appManager = appManager;
 
@@ -39,7 +37,7 @@ describe('`integrity` command', function() {
             inspectIntegrity: this.resourceInspectIntegrityStub
         });
 
-        this.cli = new CLI(appManager, new ConfigMock(), {name: 'cli'});
+        this.cli = new CLI(appManager, new Config(), {name: 'cli'});
 
         this.logStub = sinon.stub();
         this.action = integrityCmd.action(this.cli).bind({

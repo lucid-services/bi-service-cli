@@ -5,7 +5,7 @@ var chai       = require('chai');
 var sinonChai  = require("sinon-chai");
 var service    = require('bi-service');
 
-var ConfigMock = require('../mocks/config.js');
+var Config     = require('bi-config').Config;
 var ServerMock = require('../mocks/server.js');
 var CLI        = require('../../../lib/index.js').CLI;
 var useCmd     = rewire('../../../lib/commands/use.js');
@@ -23,7 +23,7 @@ describe('`use` command', function() {
             odm: {},
             orm: {}
         };
-        this.config = new ConfigMock();
+        this.config = new Config();
 
         this.service = new service.Service(this.config);
         this.appManager = this.service.appManager;
@@ -34,7 +34,7 @@ describe('`use` command', function() {
         app.server = new ServerMock;
         app2.server = new ServerMock;
 
-        this.cli = this.appManager.buildCLI(new ConfigMock, {name: 'cli'});
+        this.cli = this.appManager.buildCLI(new Config(), {name: 'cli'});
 
         this.logStub = sinon.stub();
         this.action = useCmd.action(this.cli).bind({
