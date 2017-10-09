@@ -20,7 +20,7 @@ Require the plugin module preferably at the bottom of your index.js file of your
 
 Add the cli app
 
-```json
+```javascript
 {
     listen: {
         cli: {
