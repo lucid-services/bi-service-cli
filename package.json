@@ -18,7 +18,7 @@
         "README.md"
     ],
     "engines": {
-        "node": ">=4.0.0"
+        "node": ">=6.4.0"
     },
     "license": "GPL-3.0",
     "author": "Bohemia Interactive",
@@ -35,10 +35,10 @@
     "devDependencies": {
         "bi-service": ">=1.0.0-alpha <2",
         "bi-service-sdk": "^1.0.1",
-        "chai": "^3.5.0",
-        "chai-as-promised": "^5.3.0",
+        "chai": "^4.1.2",
+        "chai-as-promised": "^7.1.1",
         "istanbul": "^0.4.3",
-        "mocha": "^2.5.3",
+        "mocha": "^3.5.3",
         "rewire": "^2.5.2",
         "sinon": "^1.17.3",
         "sinon-as-promised": "^4.0.0",

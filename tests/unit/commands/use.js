@@ -64,7 +64,7 @@ describe('`use` command', function() {
             }, sinon.spy());
 
             this.cli.apps.should.have.lengthOf(1);
-            this.cli.apps.should.include(this.app);
+            this.cli.apps[0].should.be.equal(this.app);
         });
 
         it('should disconnect all currently conected apps and connect the one specified (string identifier)', function() {
@@ -73,7 +73,7 @@ describe('`use` command', function() {
             }, sinon.spy());
 
             _.compact(this.cli.apps).should.have.lengthOf(1);
-            this.cli.apps.should.include(this.app2);
+            _.compact(this.cli.apps)[0].should.be.equal(this.app2);
         });
 
         it('should log an Invalid argument error', function() {
