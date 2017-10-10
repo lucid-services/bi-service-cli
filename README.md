@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/BohemiaInteractive/bi-service-cli.svg?branch=master)](https://travis-ci.org/BohemiaInteractive/bi-service-cli)   
+
 Provides a `bi-service` based `App` which spies on `AppManager`'s apps to provide
 integrity status of the running service.
 
