@@ -3,7 +3,7 @@ var chai           = require('chai');
 var sinonChai      = require("sinon-chai");
 var chaiAsPromised = require('chai-as-promised');
 var Vantage        = require('bi-vantage');
-var VorpalUI       = require('vorpal/lib/ui');
+var VorpalUI       = require('bi-vorpal/lib/ui');
 var service        = require('bi-service');
 
 var Config     = require('bi-config').Config;
