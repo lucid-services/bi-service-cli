@@ -1,6 +1,6 @@
 {
     "name": "bi-service-cli",
-    "version": "2.0.0-alpha",
+    "version": "2.0.0-dev.20171222",
     "description": "CLI plugin module for bi-service",
     "main": "./lib/index.js",
     "scripts": {
@@ -24,7 +24,7 @@
     "author": "Bohemia Interactive",
     "private": false,
     "peerDependencies": {
-        "bi-service": ">=1.0.0-alpha <2"
+        "bi-service": "TODO"
     },
     "dependencies": {
         "bi-vantage": "^1.8.0",
@@ -33,7 +33,7 @@
         "lodash": "^4.16.2"
     },
     "devDependencies": {
-        "bi-service": ">=1.0.0-alpha <2",
+        "bi-service": "TODO",
         "bi-service-sdk": "^1.0.1",
         "chai": "^4.1.2",
         "chai-as-promised": "^7.1.1",
@@ -42,6 +42,7 @@
         "rewire": "^2.5.2",
         "sinon": "^1.17.3",
         "sinon-as-promised": "^4.0.0",
+        "supertest": "^1.1.0",
         "sinon-chai": "^2.8.0"
     }
 }
