@@ -74,7 +74,7 @@ describe('CLI', function() {
             this.cli = new CLI(this.appManager, new Config(), {name: 'cli'});
 
             //TODO causes the npm run coverage to print [ERROR]
-            //event though all tests pass
+            //even though all tests pass
             this.cli.listen(3100);
 
             this.cliServerCloseStub = sinon.stub(this.cli.vantage.server.server, 'close');
