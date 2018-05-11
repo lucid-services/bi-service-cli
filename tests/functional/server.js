@@ -111,9 +111,12 @@ describe('functional cli http server', function() {
 
         it('should return 409 status code with valid json reponse', function(done) {
             const err = new service.error.ServiceError('test error');
+            const err2 = 'err description';
 
-            this.resourceMock.inspectIntegrity.rejects(err);
+            this.resourceMock.inspectIntegrity.onFirstCall().rejects(err);
+            this.resourceMock.inspectIntegrity.onSecondCall().rejects(err2);
             this.service.resourceManager.register('failing-resource', this.resourceMock);
+            this.service.resourceManager.register('failing-resource2', this.resourceMock);
 
             let req = this.request.get('/api/v1.0/integrity');
             req.expect(409, {
@@ -122,7 +125,8 @@ describe('functional cli http server', function() {
                 api_code: null,
                 uid: null,
                 context: {
-                    'failing-resource': err.toLogger()
+                    'failing-resource': err.toLogger(),
+                    'failing-resource2': 'Error: ' + err2,
                 }
             }, done);
         });
