@@ -3,9 +3,9 @@ var rewire     = require('rewire');
 var sinon      = require('sinon');
 var chai       = require('chai');
 var sinonChai  = require("sinon-chai");
-var service    = require('bi-service');
+var service    = require('serviser');
 
-var Config     = require('bi-config').Config;
+var Config     = require('serviser-config').Config;
 var ServerMock = require('../mocks/server.js');
 var CLI        = require('../../../lib/index.js').CLI;
 var useCmd     = rewire('../../../lib/commands/use.js');

@@ -1,4 +1,4 @@
-const service        = require('bi-service');
+const service        = require('serviser');
 const path           = require('path');
 const chai           = require('chai');
 const sinon          = require('sinon');
@@ -8,7 +8,7 @@ const Promise        = require('bluebird');
 const request        = require('supertest');
 
 const CLI        = require('../../lib/index.js').CLI;
-const Config     = require('bi-config').Config;
+const Config     = require('serviser-config').Config;
 const AppManager = service.AppManager;
 
 global.Promise = Promise;
@@ -56,22 +56,22 @@ describe('functional cli http server', function() {
             req.expect(200, {}, done);
         });
 
-        it('should NOT inspect resources tagged with `bi-service` label when `spread` option is set to false', function(done) {
+        it('should NOT inspect resources tagged with `serviser` label when `spread` option is set to false', function(done) {
             const self = this;
-            const err = new service.error.ServiceError('Expected inspectIntegrity method of bi-service resource mock to NOT be called');
+            const err = new service.error.ServiceError('Expected inspectIntegrity method of serviser resource mock to NOT be called');
             this.resourceMock.inspectIntegrity.rejects(err);
 
             this.service.resourceManager.register(
-                'bi-service-sdk-mock',
+                'serviser-sdk-mock',
                 this.resourceMock
             );
 
-            this.service.resourceManager.tag('bi-service-sdk-mock', 'bi-service');
+            this.service.resourceManager.tag('serviser-sdk-mock', 'serviser');
 
             let req = this.request.get('/api/v1.0/integrity?spread=false');
             req.expect(200, {}).end(function(err, res) {
                 //TODO use public method to remove a resource from the manager
-                //object when it is available in bi-service@1.0.0
+                //object when it is available in serviser@1.0.0
                 self.service.resourceManager.resources = {};
                 self.service.resourceManager.tags = {};
 
@@ -91,13 +91,13 @@ describe('functional cli http server', function() {
 
             this.service.resourceManager.register('resource1', this.resourceMock);
             this.service.resourceManager.register('resource2', this.resourceMock);
-            this.service.resourceManager.tag('resource1', 'bi-service');
+            this.service.resourceManager.tag('resource1', 'serviser');
 
 
             let req = this.request.get('/api/v1.0/integrity');
             req.end(function(err) {
                 //TODO use public method to remove a resource from the manager
-                //object when it is available in bi-service@1.0.0
+                //object when it is available in serviser@1.0.0
                 self.service.resourceManager.resources = {};
                 self.service.resourceManager.tags = {};
                 try {

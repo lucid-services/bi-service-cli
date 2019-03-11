@@ -4,9 +4,9 @@ var chai             = require('chai');
 var sinonChai        = require("sinon-chai");
 var chaiAsPromised   = require('chai-as-promised');
 var Promise          = require('bluebird');
-var service          = require('bi-service');
+var service          = require('serviser');
 
-var Config           = require('bi-config').Config;
+var Config           = require('serviser-config').Config;
 var CLI              = require('../../../lib/index.js').CLI;
 var integrityCmd     = rewire('../../../lib/commands/integrity.js');
 
