@@ -1,24 +1,24 @@
-[![Build Status](https://travis-ci.org/BohemiaInteractive/bi-service-cli.svg?branch=master)](https://travis-ci.org/BohemiaInteractive/bi-service-cli)   
+[![Build Status](https://travis-ci.org/lucid-services/serviser-cli.svg?branch=master)](https://travis-ci.org/lucid-services/serviser-cli)   
 
-Provides a `bi-service` based `App` which spies on `AppManager`'s apps to provide
+Implements `serviser` `http` & `REPL` `App` which spies on `AppManager`'s apps to provide
 integrity status of the running service.
 
 ### Integration
 
 ```javascript
 
-var Service = require('bi-service').Service;
+var Service = require('serviser').Service;
 
 //your service definition
 module.exports = new Service;
 
-//hookup the plugin to the bi-service
-require('bi-service-cli');
+//hookup the plugin to the serviser
+require('serviser-cli');
 ```
 
 Require the plugin module preferably at the bottom of your index.js file of your project (aka. where your Service definition should be)
 
-### bi-service project config
+### serviser project config
 
 Add the cli app
 

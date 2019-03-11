@@ -1,7 +1,7 @@
 {
-    "name": "bi-service-cli",
+    "name": "serviser-cli",
     "version": "2.0.1",
-    "description": "CLI plugin module for bi-service",
+    "description": "CLI plugin module for serviser",
     "main": "./lib/index.js",
     "scripts": {
         "coverage": "export NODE_ENV=test; istanbul cover node_modules/mocha/bin/_mocha -- --recursive --ui tdd -R spec tests",
@@ -10,7 +10,7 @@
     "testFramework": "mocha",
     "keywords": [
         "cli",
-        "bi-service"
+        "serviser"
     ],
     "files": [
         "lib",
@@ -21,20 +21,20 @@
         "node": ">=6.4.0"
     },
     "license": "GPL-3.0",
-    "author": "Bohemia Interactive",
+    "author": "fogine",
     "private": false,
     "peerDependencies": {
-        "bi-service": "^1.0.0"
+        "serviser": "^2.0.0"
     },
     "dependencies": {
-        "bi-vantage": "^1.8.0",
+        "serviser-vantage": "^1.8.0",
         "easy-table": "1.1.0",
         "chalk": "~2.3.0",
         "lodash": "~4.17.4"
     },
     "devDependencies": {
-        "bi-service": "^1.0.0",
-        "bi-service-sdk": "^1.0.1",
+        "serviser": "^2.0.0",
+        "serviser-sdk": "^1.0.1",
         "chai": "^4.1.2",
         "chai-as-promised": "^7.1.1",
         "istanbul": "^0.4.3",
