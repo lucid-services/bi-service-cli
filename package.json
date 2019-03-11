@@ -1,6 +1,6 @@
 {
     "name": "serviser-cli",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "CLI plugin module for serviser",
     "main": "./lib/index.js",
     "scripts": {
